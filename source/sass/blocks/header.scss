@@ -123,3 +123,13 @@
     background-size: cover;
   }
 }
+
+.header__logo {
+  position: absolute;
+  bottom: 40px;
+  right: 100px;
+
+  @media(max-width: 1023px) {
+    display: none;
+  }
+}
