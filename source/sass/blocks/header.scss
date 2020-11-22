@@ -1,6 +1,4 @@
 .header {
-  height: 552px;
-
   background-color: #202020;
 
   @media(min-width: $desktop-width) {
@@ -13,18 +11,14 @@
   max-width: 320px;
   margin: 0 auto;
 
-  border: 1px solid blue;
-
   @media(min-width: $desktop-width) {
     max-width: 68.06%;
   }
 }
 
 .header__painter-text {
-  padding: 42px 0 42px 20px;
+  padding: 42px 0 60px 20px;
   color:  #F5F5F5;
-
-  border: 1px solid red;
 
   @media(min-width: $desktop-width) {
     display: flex;
@@ -87,7 +81,7 @@
 .header__painter-about {
   margin: 0;
   padding: 0;
-  padding-top: 5px;
+  padding-top: 21px;
   padding-right: 10px;
 
   font-style: normal;
@@ -107,16 +101,13 @@
   background-image: url("../../img/paint-header-mobile.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #E5E5E5;
-
-  border: 1px solid green;
+  background-color: #FFFFFF;
 
   @media(min-width: $desktop-width) {
     height: auto;
     width: 31.94%;
     order: -1;
   
-
     background-image: url("../../img/paint-header-desktop.jpg");
     background-repeat: no-repeat;
     background-position: center;

@@ -1,0 +1,55 @@
+.biography {
+  background-color: #FFFFFF;
+  border: 1px solid greenyellow;
+}
+
+.biography__wrapper {
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 60px 20px 0 20px;
+}
+
+.biography__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 25px;
+}
+
+.biography__item {
+  &:nth-child(1n):not(:first-child) {
+    margin-top: 20px;
+  }
+}
+
+.biography__year {
+  margin: 0;
+  padding: 0;
+
+  font-size: 20px;
+  line-height: 40px;
+  font-family: $helvetica;
+  letter-spacing: 1px;
+  color: #BFBFBF;
+}
+
+.biography__text {
+  margin: 0;
+  padding: 0;
+
+  font-size: 16px;
+  line-height: 26px;
+  font-family: $helvetica;
+  color: #4C4C4C;
+
+  &:nth-child(1n):not(:first-child) {
+    margin-top: 5px;
+  }
+}
+
+.biography__footer {
+  max-width: 320px;
+  margin: 0 auto;
+  margin-top: 12px;
+  padding: 0 20px 0 20px;
+}

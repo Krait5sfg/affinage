@@ -1,0 +1,23 @@
+.section-footer__link {
+  position: relative;
+  
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 40px;
+  font-family: $helvetica;
+  color: #202020;
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: 18px;
+    left: 0;
+
+    width: 121px;
+    height: 16px;
+
+    background-image: url("../img/arrow-icon.svg");
+    background-repeat: no-repeat;
+  }
+}
