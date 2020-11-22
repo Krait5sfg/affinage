@@ -1,0 +1,125 @@
+.header {
+  height: 552px;
+
+  background-color: #202020;
+
+  @media(min-width: $desktop-width) {
+    display: flex;
+    height: 100%;
+  }
+}
+
+.header__description {
+  max-width: 320px;
+  margin: 0 auto;
+
+  border: 1px solid blue;
+
+  @media(min-width: $desktop-width) {
+    max-width: 68.06%;
+  }
+}
+
+.header__painter-text {
+  padding: 42px 0 42px 20px;
+  color:  #F5F5F5;
+
+  border: 1px solid red;
+
+  @media(min-width: $desktop-width) {
+    display: flex;
+    padding: 0;
+    height: calc(100% - 97px); // высота десктопа минус высота меню
+    align-items: center;
+  }
+}
+
+.header__painter-years {
+  font-style: normal;
+  font-size: 20px;
+  line-height: 18.3px;
+  font-family: $yeseva;
+  font-weight: 400;
+
+  @media(min-width: $desktop-width) {
+    width: 59px;
+    margin-left: -37px;
+    width: 306px;
+
+    font-size: 64px;
+    line-height: 58.55px;
+    white-space: nowrap;
+  }
+}
+
+.header__painter-years-text {
+  @media(min-width: $desktop-width) {
+    display: block;
+    transform: rotate(-90deg);
+  }
+}
+
+.header__painter-data {
+  @media(min-width: $desktop-width) {
+    margin-left: -60px;
+    padding-right: calc(100% - 730px);
+  }
+}
+
+.header__painter-name {
+  margin: 0; //reset h1
+  padding-top: 15px;
+
+  font-style: normal;
+  font-size: 40px;
+  line-height: 44px;
+  font-family: $yeseva;
+  font-weight: 400;
+
+  @media(min-width: $desktop-width) {    
+    padding: 0;
+
+    font-size: 80px;
+    line-height: 80px;
+  }
+}
+
+.header__painter-about {
+  margin: 0;
+  padding: 0;
+  padding-top: 5px;
+  padding-right: 10px;
+
+  font-style: normal;
+  font-size: 16px;
+  line-height: 29px;
+  font-family: $helvetica;
+
+  @media(min-width: $desktop-width) {
+    padding: 0;
+    padding-top: 30px;
+  }
+}
+
+.header__image-block {
+  height: 125px;
+
+  background-image: url("../../img/paint-header-mobile.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #E5E5E5;
+
+  border: 1px solid green;
+
+  @media(min-width: $desktop-width) {
+    height: auto;
+    width: 31.94%;
+    order: -1;
+  
+
+    background-image: url("../../img/paint-header-desktop.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
