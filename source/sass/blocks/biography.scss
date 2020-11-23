@@ -1,12 +1,24 @@
 .biography {
   background-color: #FFFFFF;
-  border: 1px solid greenyellow;
 }
 
 .biography__wrapper {
   max-width: 320px;
   margin: 0 auto;
   padding: 60px 20px 0 20px;
+
+  @media(min-width: $desktop-width) {
+    display: flex;
+    max-width: 920px;
+    padding: 0;
+  }
+}
+
+.biography__title {
+  @media(min-width: $desktop-width) {
+    margin-top: 100px;
+    flex-basis: 235px;
+  }
 }
 
 .biography__list {
@@ -14,11 +26,19 @@
   padding: 0;
   list-style: none;
   margin-top: 25px;
+
+  @media(min-width: $desktop-width) {
+    margin-top: 96px;
+  }
 }
 
 .biography__item {
   &:nth-child(1n):not(:first-child) {
     margin-top: 20px;
+  }
+
+  @media(min-width: $desktop-width) {
+    display: flex;
   }
 }
 
@@ -28,9 +48,18 @@
 
   font-size: 20px;
   line-height: 40px;
+  font-weight: bold;
   font-family: $helvetica;
   letter-spacing: 1px;
   color: #BFBFBF;
+}
+
+.biography__year--empty,
+.biography__year {
+  @media(min-width: $desktop-width) {
+    flex-basis: 51px;
+    margin-left: 90px;
+  }
 }
 
 .biography__text {
@@ -45,11 +74,18 @@
   &:nth-child(1n):not(:first-child) {
     margin-top: 5px;
   }
+
+  @media(min-width: $desktop-width) {
+    flex-basis: 520px;
+    margin-left: auto;
+  }
 }
 
 .biography__footer {
-  max-width: 320px;
   margin: 0 auto;
   margin-top: 12px;
-  padding: 0 20px 0 20px;
+
+  @media(min-width: $desktop-width) {
+    margin-top: 18px;
+  }
 }
