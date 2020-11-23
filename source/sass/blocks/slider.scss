@@ -4,6 +4,15 @@
   background-color: #202020;
 }
 
+.slider__image-title {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: $helvetica;
+  color: #F5F5F5;
+  text-align: center;
+}
+
 .slider__list {
   padding: 0;
   list-style: none;
@@ -31,4 +40,22 @@
   &:nth-child(1n):not(:last-child) {
     margin-right: 20px;
   }
+}
+
+.slider__controls {
+  max-width: 320px;
+  margin: 0 auto;
+
+  font-size: 14px;
+  line-height: 13px;
+  font-family: $helvetica;
+  text-align: center;
+}
+
+.slider__current-number {
+  color: #F5F5F5;
+}
+
+.slider__overall-number {
+  color: #848484;
 }

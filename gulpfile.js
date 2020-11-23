@@ -12,6 +12,20 @@ var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
 var del = require("del");
 var pug = require("gulp-pug");
+var uglify = require("gulp-uglify");
+var pipeline = require("readable-stream").pipeline;
+
+//минимизируем js
+gulp.task("min-js", function () {
+  return pipeline(
+    gulp.src("source/js/*.js"),
+    uglify(),
+    rename({
+      suffix: ".min"
+    }),
+    gulp.dest("build/js")
+  );
+});
 
 gulp.task('server', function () {
   browserSync.init({
@@ -23,6 +37,7 @@ gulp.task('server', function () {
   gulp.watch("source/*.pug", gulp.series("pug", "refresh"));
   gulp.watch("source/sass/**/*.scss", gulp.series("css", "refresh"));
   gulp.watch("source/*.html", gulp.series("html", "refresh"));
+  gulp.watch("source/js/*.js", gulp.series("min-js", "refresh"));
 });
 
 gulp.task('html', function () {
