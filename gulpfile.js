@@ -15,7 +15,9 @@ var pug = require("gulp-pug");
 
 gulp.task('server', function () {
   browserSync.init({
-    server: 'build'
+    server: 'build',
+    online: true,
+    tunnel: 'test'
   })
 
   gulp.watch("source/*.pug", gulp.series("pug", "refresh"));
