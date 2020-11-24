@@ -91,5 +91,5 @@ gulp.task("pug", function buildHTML() {
     .pipe(gulp.dest("source"))
 })
 
-gulp.task("build", gulp.series("delete", "copy", "css", "html"));
+gulp.task("build", gulp.series("delete", "copy", "css", "min-js", "html"));
 gulp.task("start", gulp.series("build", "server"));
