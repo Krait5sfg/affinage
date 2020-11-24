@@ -85,9 +85,11 @@
   padding-right: 10px;
 
   font-style: normal;
+  font-weight: 300;
   font-size: 16px;
   line-height: 29px;
   font-family: $helvetica;
+  color: #F5F5F5;
 
   @media(min-width: $desktop-width) {
     padding: 0;
@@ -98,7 +100,7 @@
 .header__image-block {
   height: 125px;
 
-  background-image: url("../../img/paint-header-mobile.jpg");
+  background-image: url("../img/paint-header-mobile.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-color: #FFFFFF;
@@ -108,7 +110,7 @@
     width: 31.94%;
     order: -1;
   
-    background-image: url("../../img/paint-header-desktop.jpg");
+    background-image: url("../img/paint-header-desktop.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

@@ -11,5 +11,21 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url("../fonts/Helvetica.woff2") format("woff2"), url("../fonts/Helvetica.woff") format("woff");
+  src: url("../fonts/HelveticaRegular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Helvetica";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/HelveticaBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Helvetica";
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/HelveticaLight.woff") format("woff");
 }

@@ -29,7 +29,7 @@ gulp.task("min-js", function () {
 
 gulp.task('server', function () {
   browserSync.init({
-    server: 'build',
+    server: "build/",
     online: true,
     tunnel: 'test'
   })
