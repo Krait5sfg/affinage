@@ -28,7 +28,6 @@ var callback = function (entries) {
 
 var observer = new IntersectionObserver(callback, option);
 
-var targetsElements = document.querySelectorAll('.slider__item');
 targetsElements.forEach(function (element) {
   observer.observe(element);
 });
