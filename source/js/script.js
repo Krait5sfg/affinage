@@ -15,8 +15,9 @@ document.querySelector(`.slider__overall-number`).textContent = ` ${overallNumbe
 setSlideTitle();
 setSlideNumber();
 
-// number === 1 ? slider.scrollLeft = LEFT_LIMIT_SCROLL : slider.scrollLeft = LEFT_LIMIT_SCROLL + number * 220;
-slider.scrollLeft = LEFT_LIMIT_SCROLL;
+slider.scrollLeft = number === 1 ? LEFT_LIMIT_SCROLL : LEFT_LIMIT_SCROLL + ((number - 1) * 220);
+console.log(slider.scrollLeft);
+// slider.scrollLeft = LEFT_LIMIT_SCROLL;
 
 let start;
 let change;
@@ -42,7 +43,7 @@ slider.addEventListener('touchend', (evt) => {
       activeElement.classList.add(`slider__item--active`);
     } catch (error) {
       number--;
-      slider.scrollLeft -= 160;
+      slider.scrollLeft -= LEFT_LIMIT_SCROLL;
       activeElement = slider.querySelector(`[data-number="${number}"]`);
       activeElement.classList.add(`slider__item--active`);
     }
@@ -54,7 +55,7 @@ slider.addEventListener('touchend', (evt) => {
       activeElement.classList.add(`slider__item--active`);
     } catch (error) {
       number++;
-      slider.scrollLeft += 160;
+      slider.scrollLeft += LEFT_LIMIT_SCROLL;
       activeElement = slider.querySelector(`[data-number="${number}"]`);
       activeElement.classList.add(`slider__item--active`);
     }
