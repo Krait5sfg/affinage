@@ -39,14 +39,17 @@
 
 .slider__item {
   flex-shrink: 0; //чтобы flex не зжимал картинки под размер контейнера
+  margin-right: 20px;
 
-  &:nth-child(1n):not(:last-child) {
-    margin-right: 20px;
+  &--last {
+    margin-right: 0;
   }
 
   &--end-cap {
-    width: 200px;
+    width: 220px;
     height: 156px;
+    margin: 0;
+    flex-shrink: 0;
   }
 }
 

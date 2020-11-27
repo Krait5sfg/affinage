@@ -1,6 +1,8 @@
 'use strict';
 
 //слайдер
+const LEFT_LIMIT_SCROLL = 160; // самая крайняя левая граница скрола слайдера
+
 const slider = document.querySelector(`.slider__list`);
 let activeElement = document.querySelector(`.slider__item--active`);
 let number = +activeElement.dataset.number;
@@ -8,12 +10,13 @@ let number = +activeElement.dataset.number;
 const slideTitle = document.querySelector(`.slider__image-title`);
 const slideCurrentNumberElement = document.querySelector(`.slider__current-number`);
 const overallNumber = document.querySelectorAll(`.slider__item`).length;
-document.querySelector(`.slider__overall-number`).textContent = ` ${overallNumber - 2}`;
+document.querySelector(`.slider__overall-number`).textContent = ` ${overallNumber}`;
 
 setSlideTitle();
 setSlideNumber();
 
-slider.scrollLeft = 170;
+// number === 1 ? slider.scrollLeft = LEFT_LIMIT_SCROLL : slider.scrollLeft = LEFT_LIMIT_SCROLL + number * 220;
+slider.scrollLeft = LEFT_LIMIT_SCROLL;
 
 let start;
 let change;
@@ -39,7 +42,7 @@ slider.addEventListener('touchend', (evt) => {
       activeElement.classList.add(`slider__item--active`);
     } catch (error) {
       number--;
-      slider.scrollLeft -= 170;
+      slider.scrollLeft -= 160;
       activeElement = slider.querySelector(`[data-number="${number}"]`);
       activeElement.classList.add(`slider__item--active`);
     }
@@ -51,7 +54,7 @@ slider.addEventListener('touchend', (evt) => {
       activeElement.classList.add(`slider__item--active`);
     } catch (error) {
       number++;
-      slider.scrollLeft += 170;
+      slider.scrollLeft += 160;
       activeElement = slider.querySelector(`[data-number="${number}"]`);
       activeElement.classList.add(`slider__item--active`);
     }
