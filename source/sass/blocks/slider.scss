@@ -34,24 +34,19 @@
   margin: 19px auto 0 auto;
   display: flex;
 
-  scroll-snap-type: x mandatory;
-  overflow-x: auto;
-  
-  -webkit-overflow-scrolling: touch; //для IOS
-  //скрывает горизонтальный скрол
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  overflow: hidden;
 }
 
 .slider__item {
   flex-shrink: 0; //чтобы flex не зжимал картинки под размер контейнера
-  scroll-snap-align: center;
 
   &:nth-child(1n):not(:last-child) {
     margin-right: 20px;
+  }
+
+  &--end-cap {
+    width: 200px;
+    height: 156px;
   }
 }
 

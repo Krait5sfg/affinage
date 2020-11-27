@@ -12,19 +12,13 @@ var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
 var del = require("del");
 var pug = require("gulp-pug");
-var uglify = require("gulp-uglify");
-var pipeline = require("readable-stream").pipeline;
+var uglify = require('gulp-uglify-es').default;
 
-//минимизируем js
 gulp.task("min-js", function () {
-  return pipeline(
-    gulp.src("source/js/*.js"),
-    uglify(),
-    rename({
-      suffix: ".min"
-    }),
-    gulp.dest("build/js")
-  );
+  return gulp.src("source/js/*.js")
+    .pipe(rename("script.min.js"))
+    .pipe(uglify(/* options */))
+    .pipe(gulp.dest("build/js"));
 });
 
 gulp.task('server', function () {

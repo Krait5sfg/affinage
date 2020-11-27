@@ -1,33 +1,69 @@
 'use strict';
 
 //слайдер
-var slider = document.querySelector('.slider__list');
-slider.scrollTo(100, 0); //стартовая позиция слайдера
+const slider = document.querySelector(`.slider__list`);
+let activeElement = document.querySelector(`.slider__item--active`);
+let number = +activeElement.dataset.number;
 
-var currentNumberImageContainer = document.querySelector('.slider__current-number');
-var overallNumberImageContainer = document.querySelector('.slider__overall-number');
-var targetsElements = document.querySelectorAll('.slider__item');
-var imageTitleContainer = document.querySelector('.slider__image-title');
+const slideTitle = document.querySelector(`.slider__image-title`);
+const slideCurrentNumberElement = document.querySelector(`.slider__current-number`);
+const overallNumber = document.querySelectorAll(`.slider__item`).length;
+document.querySelector(`.slider__overall-number`).textContent = ` ${overallNumber - 2}`;
 
-overallNumberImageContainer.textContent = '/ ' + targetsElements.length;
+setSlideTitle();
+setSlideNumber();
 
-var option = {
-  root: slider,
-  rootMargin: '0px',
-  threshold: 1.0
-};
+slider.scrollLeft = 170;
 
-var callback = function (entries) {
-  entries.forEach(function (entry) {
-    if (entry.isIntersecting) {
-      currentNumberImageContainer.textContent = entry.target.dataset.number + ' ';
-      imageTitleContainer.textContent = entry.target.dataset.description;
+let start;
+let change;
+
+slider.addEventListener('touchstart', (evt) => {
+  start = evt.touches[0].clientX; // координаты прикосновения
+});
+
+slider.addEventListener('touchmove', (evt) => {
+  evt.preventDefault();
+  change = start - evt.touches[0].clientX; //evt.touches[0].clientX координаты где палец оторвался от экрана
+});
+
+slider.addEventListener('touchend', (evt) => {
+  activeElement.classList.remove('slider__item--active');
+
+  if (change > 0) {
+    try {
+      slider.scrollLeft += 220;
+      number++;
+      if (slider.querySelector(`[data-number="${number}"]`)) { }
+      activeElement = slider.querySelector(`[data-number="${number}"]`);
+      activeElement.classList.add(`slider__item--active`);
+    } catch (error) {
+      number--;
+      slider.scrollLeft -= 170;
+      activeElement = slider.querySelector(`[data-number="${number}"]`);
+      activeElement.classList.add(`slider__item--active`);
     }
-  });
+  } else {
+    try {
+      number--;
+      slider.scrollLeft -= 220;
+      activeElement = slider.querySelector(`[data-number="${number}"]`);
+      activeElement.classList.add(`slider__item--active`);
+    } catch (error) {
+      number++;
+      slider.scrollLeft += 170;
+      activeElement = slider.querySelector(`[data-number="${number}"]`);
+      activeElement.classList.add(`slider__item--active`);
+    }
+  }
+  setSlideTitle();
+  setSlideNumber();
+});
+
+function setSlideTitle() {
+  slideTitle.textContent = activeElement.dataset.description;
 }
 
-var observer = new IntersectionObserver(callback, option);
-
-targetsElements.forEach(function (element) {
-  observer.observe(element);
-});
+function setSlideNumber() {
+  slideCurrentNumberElement.textContent = `${activeElement.dataset.number} /`;
+}
