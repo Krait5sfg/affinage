@@ -1,6 +1,7 @@
 .slider {
   height: 389px;
   padding-top: 61px;
+  overflow: hidden;
 
   background-color: #202020;
 
@@ -26,29 +27,30 @@
   text-align: center;
 }
 
+.slider__viewport {
+  max-width: 200px;
+  border: 1px solid red;
+  margin: 0 auto;
+}
+
 .slider__list {
-  padding: 0;
-  list-style: none;
+  position: relative;
+  left: 0;
 
-  max-width: 320px;
-  margin: 19px auto 0 auto;
   display: flex;
+  padding: 0;
 
-  overflow: hidden;
+  transition: all ease 1s;
+  list-style: none;
 }
 
 .slider__item {
+  width: 200px;
+  height: 156px;
   flex-shrink: 0; //чтобы flex не зжимал картинки под размер контейнера
-  margin-right: 20px;
 
-  &--last {
-    margin-right: 0;
-  }
-
-  &--end-cap {
-    width: 220px;
-    height: 156px;
-    flex-shrink: 0;
+  &:nth-child(1n):not(:last-child) {
+    margin-right: 20px;
   }
 }
 
