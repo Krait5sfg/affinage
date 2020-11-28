@@ -1,12 +1,13 @@
 'use strict';
 
 //слайдер
+const SLIDER_WIDTH = 220;
 let start;
 let change;
 let offset = 0;
 
 const sliderElements = document.querySelectorAll(`.slider__item`);
-const limitRightOffset = (sliderElements.length - 1) * 220;
+const limitRightOffset = (sliderElements.length - 1) * SLIDER_WIDTH;
 const sliderListElement = document.querySelector(`.slider__list`);
 const sliderImageTitleElement = document.querySelector(`.slider__image-title`);
 let sliderItemActive = sliderListElement.querySelector(`.slider__item--active`);
@@ -17,6 +18,10 @@ const sliderOverallNumberElement = document.querySelector(`.slider__overall-numb
 sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
 sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
 sliderOverallNumberElement.textContent = `/ ${sliderElements.length}`;
+
+//start position
+offset = -(numberActiveSlider - 1) * SLIDER_WIDTH;
+sliderListElement.style.left = `${offset}px`;
 
 sliderListElement.addEventListener('touchstart', (evt) => {
   start = evt.touches[0].clientX;
@@ -43,7 +48,7 @@ function slideShow() {
     sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
     sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
 
-    offset -= 220;
+    offset -= SLIDER_WIDTH;
     sliderListElement.style.left = `${offset}px`;
   } else {
 
@@ -56,7 +61,7 @@ function slideShow() {
     sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
     sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
 
-    offset += 220;
+    offset += SLIDER_WIDTH;
     sliderListElement.style.left = `${offset}px`;
   }
 };
