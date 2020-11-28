@@ -2,6 +2,7 @@
 
 //слайдер
 const SLIDER_WIDTH = 220;
+const SLIDER_WIDTH_DESKTOP = 800;
 let start;
 let change;
 let offset = 0;
@@ -14,28 +15,92 @@ let sliderItemActive = sliderListElement.querySelector(`.slider__item--active`);
 let numberActiveSlider = sliderItemActive.dataset.number;
 const sliderCurrentNumberElement = document.querySelector(`.slider__current-number`);
 const sliderOverallNumberElement = document.querySelector(`.slider__overall-number`);
+const sliderButtonLeft = document.querySelector(`.slider__left`);
+const sliderButtonRight = document.querySelector(`.slider__right`);
+const sliderMainImageElement = document.querySelector(`.slider__main-image`);
 
 sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
 sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
 sliderOverallNumberElement.textContent = `/ ${sliderElements.length}`;
 
+let windowWidth = document.documentElement.offsetWidth;
+window.addEventListener(`resize`, () => {
+  windowWidth = document.documentElement.offsetWidth;
+  if (windowWidth < 1024) {
+    offset = -(numberActiveSlider - 1) * SLIDER_WIDTH;
+    sliderListElement.style.left = `${offset}px`;
+    addEventListeners();
+  }
+  if (windowWidth > 1023) {
+    offset = getOffsetForDesktop(numberActiveSlider, 5);
+    sliderListElement.style.left = `${offset}px`;
+    removeEventListeners();
+  }
+});
+
 //start position
-offset = -(numberActiveSlider - 1) * SLIDER_WIDTH;
-sliderListElement.style.left = `${offset}px`;
+if (windowWidth < 1024) {
+  offset = -(numberActiveSlider - 1) * SLIDER_WIDTH;
+  sliderListElement.style.left = `${offset}px`;
+  addEventListeners();
+}
+if (windowWidth > 1023) {
+  offset = getOffsetForDesktop(numberActiveSlider, 5);
+  sliderListElement.style.left = `${offset}px`;
+  removeEventListeners();
+  sliderMainImageElement.setAttribute(`src`, sliderItemActive.dataset.source);
+}
 
-sliderListElement.addEventListener('touchstart', (evt) => {
-  start = evt.touches[0].clientX;
+sliderButtonLeft.addEventListener(`click`, () => {
+  setTimeout(() => {
+    sliderMainImageElement.classList.remove(`slider__main-image--fade-in`);
+  }, 1000);
+
+  numberActiveSlider--;
+  if (numberActiveSlider === 0 || numberActiveSlider < 0) {
+    numberActiveSlider++;
+    return false;
+  }
+
+  sliderItemActive.classList.remove(`slider__item--active`);
+
+  sliderItemActive = sliderListElement.querySelector(`[data-number="${numberActiveSlider}"]`);
+  sliderItemActive.classList.add(`slider__item--active`);
+  sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
+  sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
+  sliderMainImageElement.setAttribute(`src`, sliderItemActive.dataset.source);
+  sliderMainImageElement.classList.add(`slider__main-image--fade-in`);
+
+  offset = getOffsetForDesktop(numberActiveSlider, 5);
+  sliderListElement.style.left = `${offset}px`;
 });
 
-sliderListElement.addEventListener('touchmove', (evt) => {
-  evt.preventDefault();
-  let touch = evt.touches[0];
-  change = start - touch.clientX;
+sliderButtonRight.addEventListener(`click`, () => {
+  setTimeout(() => {
+    sliderMainImageElement.classList.remove(`slider__main-image--fade-in`);
+  }, 1000);
+
+  numberActiveSlider++;
+  if (numberActiveSlider > sliderElements.length) {
+    numberActiveSlider--;
+    return false;
+  }
+
+  sliderItemActive.classList.remove(`slider__item--active`);
+
+  sliderItemActive = sliderListElement.querySelector(`[data-number="${numberActiveSlider}"]`);
+  sliderItemActive.classList.add(`slider__item--active`);
+  sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
+  sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
+  sliderMainImageElement.setAttribute(`src`, sliderItemActive.dataset.source);
+  sliderMainImageElement.classList.add(`slider__main-image--fade-in`);
+
+  offset = getOffsetForDesktop(numberActiveSlider, 5);
+  sliderListElement.style.left = `${offset}px`;
 });
 
-sliderListElement.addEventListener('touchend', slideShow);
-
-function slideShow() {
+function onSliderListElementsTouchEnd() {
+  sliderItemActive.classList.remove(`slider__item--active`);
 
   if (change > 0) {
 
@@ -45,6 +110,7 @@ function slideShow() {
 
     numberActiveSlider++;
     sliderItemActive = sliderListElement.querySelector(`[data-number="${numberActiveSlider}"]`);
+    sliderItemActive.classList.add(`slider__item--active`);
     sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
     sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
 
@@ -58,6 +124,7 @@ function slideShow() {
 
     numberActiveSlider--;
     sliderItemActive = sliderListElement.querySelector(`[data-number="${numberActiveSlider}"]`);
+    sliderItemActive.classList.add(`slider__item--active`);
     sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
     sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
 
@@ -65,3 +132,37 @@ function slideShow() {
     sliderListElement.style.left = `${offset}px`;
   }
 };
+
+function onSliderListElementTouchStart(evt) {
+  start = evt.touches[0].clientX;
+}
+
+function onSliderListElementTouchMove(evt) {
+  evt.preventDefault();
+  let touch = evt.touches[0];
+  change = start - touch.clientX;
+}
+
+function getOffsetForDesktop(numberActiveSlider, divisionNumber) {
+  let offsetIndex = numberActiveSlider / divisionNumber;
+  // return offsetIndex < 1 || offsetIndex === 1 ? 0 : -Math.floor(offsetIndex) * SLIDER_WIDTH_DESKTOP;
+  if (offsetIndex < 1 || offsetIndex === 1) {
+    return 0;
+  } else if (offsetIndex > 1 && !Number.isInteger(offsetIndex)) {
+    return -Math.floor(offsetIndex) * SLIDER_WIDTH_DESKTOP;
+  } else if (offsetIndex > 1 && Number.isInteger(offsetIndex)) {
+    return -(offsetIndex - 1) * SLIDER_WIDTH_DESKTOP;
+  }
+}
+
+function removeEventListeners() {
+  sliderListElement.removeEventListener('touchstart', onSliderListElementTouchStart);
+  sliderListElement.removeEventListener('touchmove', onSliderListElementTouchMove);
+  sliderListElement.removeEventListener('touchend', onSliderListElementsTouchEnd);
+}
+
+function addEventListeners() {
+  sliderListElement.addEventListener('touchstart', onSliderListElementTouchStart);
+  sliderListElement.addEventListener('touchmove', onSliderListElementTouchMove);
+  sliderListElement.addEventListener('touchend', onSliderListElementsTouchEnd);
+}
