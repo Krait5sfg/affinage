@@ -51,6 +51,10 @@
 
   transition: all ease 1s;
   list-style: none;
+
+  @media(min-width: $desktop-width) {
+    transition: none;
+  }
 }
 
 .slider__item {
@@ -68,6 +72,8 @@
     width: 120px;
     height: 90px;
 
+    cursor: pointer;
+
     &:nth-child(1n):not(:last-child) {
       margin-right: 40px;
     }
@@ -79,7 +85,7 @@
       left: 0;
 
       width: inherit;
-      height: inherit;
+      height: 94px;
 
       background-color: rgba(0, 0, 0, 0.45);
     }
@@ -91,7 +97,7 @@
       left: 0;
 
       width: inherit;
-      height: inherit;
+      height: 94px;
 
       background-color: rgba(0, 0, 0, 0);
     }
@@ -105,7 +111,7 @@
   }
 }
 
-.slider__main-image {
+.slider__main-image {  
   &--fade-in {
     animation: fadeIn ease 5s;
   }

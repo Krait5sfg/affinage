@@ -30,12 +30,18 @@ window.addEventListener(`resize`, () => {
     offset = -(numberActiveSlider - 1) * SLIDER_WIDTH;
     sliderListElement.style.left = `${offset}px`;
     addEventListeners();
+    sliderListElement.removeEventListener('click', onSliderListElementClick);
   }
   if (windowWidth > 1023) {
     offset = getOffsetForDesktop(numberActiveSlider, 5);
     sliderListElement.style.left = `${offset}px`;
     removeEventListeners();
+    sliderListElement.addEventListener(`click`, onSliderListElementClick);
+    sliderMainImageElement.setAttribute(`src`, sliderItemActive.dataset.source);
   }
+
+  numberActiveSlider === 1 ? sliderButtonLeft.disabled = true : sliderButtonLeft.disabled = false;
+  numberActiveSlider === sliderElements.length ? sliderButtonRight.disabled = true : sliderButtonRight.disabled = false;
 });
 
 //start position
@@ -43,12 +49,14 @@ if (windowWidth < 1024) {
   offset = -(numberActiveSlider - 1) * SLIDER_WIDTH;
   sliderListElement.style.left = `${offset}px`;
   addEventListeners();
+  sliderListElement.removeEventListener('click', onSliderListElementClick);
 }
 if (windowWidth > 1023) {
   offset = getOffsetForDesktop(numberActiveSlider, 5);
   sliderListElement.style.left = `${offset}px`;
   removeEventListeners();
   sliderMainImageElement.setAttribute(`src`, sliderItemActive.dataset.source);
+  sliderListElement.addEventListener(`click`, onSliderListElementClick);
 }
 
 sliderButtonLeft.addEventListener(`click`, () => {
@@ -57,9 +65,11 @@ sliderButtonLeft.addEventListener(`click`, () => {
   }, 1000);
 
   numberActiveSlider--;
-  if (numberActiveSlider === 0 || numberActiveSlider < 0) {
-    numberActiveSlider++;
-    return false;
+  if (numberActiveSlider === 1) {
+    sliderButtonLeft.disabled = true;
+  }
+  if (sliderButtonRight.disabled) {
+    sliderButtonRight.disabled = false;
   }
 
   sliderItemActive.classList.remove(`slider__item--active`);
@@ -81,9 +91,11 @@ sliderButtonRight.addEventListener(`click`, () => {
   }, 1000);
 
   numberActiveSlider++;
-  if (numberActiveSlider > sliderElements.length) {
-    numberActiveSlider--;
-    return false;
+  if (numberActiveSlider === sliderElements.length) {
+    sliderButtonRight.disabled = true;
+  }
+  if (sliderButtonLeft.disabled) {
+    sliderButtonLeft.disabled = false;
   }
 
   sliderItemActive.classList.remove(`slider__item--active`);
@@ -98,6 +110,30 @@ sliderButtonRight.addEventListener(`click`, () => {
   offset = getOffsetForDesktop(numberActiveSlider, 5);
   sliderListElement.style.left = `${offset}px`;
 });
+
+function onSliderListElementClick(evt) {
+
+  if (evt.target.classList.contains(`slider__list`)) {
+    return false;
+  }
+
+  setTimeout(() => {
+    sliderMainImageElement.classList.remove(`slider__main-image--fade-in`);
+  }, 1000);
+
+  numberActiveSlider = +evt.target.dataset.number;
+  sliderItemActive.classList.remove(`slider__item--active`);
+  sliderItemActive = evt.target;
+  sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
+  sliderCurrentNumberElement.textContent = `${sliderItemActive.dataset.number} `;
+  sliderItemActive.classList.add(`slider__item--active`);
+
+  sliderMainImageElement.setAttribute(`src`, sliderItemActive.dataset.source);
+  sliderMainImageElement.classList.add(`slider__main-image--fade-in`);
+
+  numberActiveSlider === 1 ? sliderButtonLeft.disabled = true : sliderButtonLeft.disabled = false;
+  numberActiveSlider === sliderElements.length ? sliderButtonRight.disabled = true : sliderButtonRight.disabled = false;
+};
 
 function onSliderListElementsTouchEnd() {
   sliderItemActive.classList.remove(`slider__item--active`);
@@ -145,7 +181,6 @@ function onSliderListElementTouchMove(evt) {
 
 function getOffsetForDesktop(numberActiveSlider, divisionNumber) {
   let offsetIndex = numberActiveSlider / divisionNumber;
-  // return offsetIndex < 1 || offsetIndex === 1 ? 0 : -Math.floor(offsetIndex) * SLIDER_WIDTH_DESKTOP;
   if (offsetIndex < 1 || offsetIndex === 1) {
     return 0;
   } else if (offsetIndex > 1 && !Number.isInteger(offsetIndex)) {
