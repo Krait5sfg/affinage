@@ -15,8 +15,8 @@ let sliderItemActive = sliderListElement.querySelector(`.slider__item--active`);
 let numberActiveSlider = sliderItemActive.dataset.number;
 const sliderCurrentNumberElement = document.querySelector(`.slider__current-number`);
 const sliderOverallNumberElement = document.querySelector(`.slider__overall-number`);
-const sliderButtonLeft = document.querySelector(`.slider__left`);
-const sliderButtonRight = document.querySelector(`.slider__right`);
+const sliderButtonLeft = document.querySelector(`.slider__button-left`);
+const sliderButtonRight = document.querySelector(`.slider__button-right`);
 const sliderMainImageElement = document.querySelector(`.slider__main-image`);
 
 sliderImageTitleElement.textContent = sliderItemActive.dataset.title;
