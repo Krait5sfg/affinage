@@ -43,6 +43,13 @@
     margin-right: 35px;
     margin-bottom: 5px;
   }
+
+  &--middle {
+    @media(min-width: $desktop-width) {
+      margin-left: 178px;
+      margin-bottom: 3px;
+    }
+  }
 }
 
 .section-footer__list {
