@@ -1,7 +1,7 @@
 .creation {
   position: relative;
 
-  height: 1773px; // временно
+  height: 1773px;
   padding-top: 62px;
 
   &::after {
@@ -29,6 +29,7 @@
   }
 
   @media(min-width: $desktop-width) {
+    height: 1525px;
     padding-top: 101px;
 
     &::after {

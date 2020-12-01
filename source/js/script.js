@@ -201,3 +201,43 @@ function addEventListeners() {
   sliderListElement.addEventListener('touchmove', onSliderListElementTouchMove);
   sliderListElement.addEventListener('touchend', onSliderListElementsTouchEnd);
 }
+
+//postition the pin on map
+
+//start position on modile
+const mapContainer = document.querySelector(`.map__container`);
+const mapPin = document.querySelector(`.map__pin`);
+let widthMapContainer = mapContainer.offsetWidth;
+
+setTopValue(widthMapContainer);
+
+const resizeObserver = new ResizeObserver((entries) => {
+  widthMapContainer = entries[0].target.offsetWidth;
+  setTopValue(widthMapContainer);
+});
+
+resizeObserver.observe(mapContainer);
+
+function setTopValue(containerWidth) {
+  let ratio = 2.6;
+
+  if (containerWidth > 699) {
+    mapPin.style.top = `20%`;
+    return false;
+  }
+
+  switch (true) {
+    case containerWidth > 399 && containerWidth < 500:
+      ratio = 2.5;
+      break;
+    case containerWidth > 499 && containerWidth < 600:
+      ratio = 2.4;
+      break;
+    case containerWidth > 599:
+      ratio = 2.3;
+      break;
+    default:
+      ratio = 2.6;
+  }
+  mapPin.style.top = `${containerWidth / ratio}px`;
+}
