@@ -241,3 +241,60 @@ function setTopValue(containerWidth) {
   }
   mapPin.style.top = `${containerWidth / ratio}px`;
 }
+
+//ajax
+const jsAjax = document.querySelector(`.js-ajax`);
+const biographyList = document.querySelector(`.biography__list`);
+let isActive = false;
+jsAjax.addEventListener(`click`, (evt) => {
+  evt.preventDefault();
+  if (!isActive) {
+    isActive = true;
+    jsAjax.textContent = `скрыть`;
+
+    fetch(`./mock/mock.json`)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+      })
+      .then((value) => {
+        return Object.entries(value);
+      })
+      .then((values) => {
+        values.forEach((data) => {
+          const liElement = createLiElement(data);
+          biographyList.appendChild(liElement);
+        })
+      });
+  } else {
+    isActive = false;
+    jsAjax.textContent = `читать больше`;
+    console.log(biographyList.children.length);
+
+    for (let x = biographyList.children.length - 1; x > 0; x--) {
+      if (biographyList.children[x].classList.contains(`biography__item--ajax`)) {
+        biographyList.children[x].remove();
+      }
+    }
+  }
+});
+
+function createLiElement(values) {
+  const liElement = document.createElement(`li`);
+  const yearElement = document.createElement(`p`);
+  const textElement = document.createElement(`p`);
+
+  liElement.classList.add(`biography__item`);
+  liElement.classList.add(`biography__item--ajax`);
+  yearElement.classList.add(`biography__year`);
+  textElement.classList.add(`biography__text`);
+
+  yearElement.textContent = values[0];
+  textElement.textContent = values[1];
+
+  liElement.appendChild(yearElement);
+  liElement.appendChild(textElement);
+
+  return liElement;
+}
