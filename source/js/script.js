@@ -298,3 +298,8 @@ function createLiElement(values) {
 
   return liElement;
 }
+
+//input
+document.querySelector(`.menu__search-icon`).addEventListener(`click`, () => {
+  document.querySelector(`.menu__input`).classList.toggle(`menu__input--active`);
+});

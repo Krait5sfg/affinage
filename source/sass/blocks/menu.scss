@@ -1,5 +1,6 @@
 .menu {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   height: 74px;
   padding-left: 20px;
@@ -16,9 +17,34 @@
   display: inline-block;
   width: 18px;
   height: 18px;
-  margin-right: auto;
+
+  cursor: pointer;
 
   background-image: url("../img/search-icon.svg");
+}
+
+.menu__input {
+  margin-left: 10px;
+  display: none;
+
+  &::placeholder {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: $helvetica;
+    font-weight: 400;
+    color: grey;
+  }
+
+  &--active {
+    display: block;
+  }
+  
+  @media(min-width: $desktop-width) {
+    width: 150px;
+  }
+  @media(min-width: 1160px) {
+    width: auto;
+  }
 }
 
 .menu__menu-icon {
@@ -27,6 +53,7 @@
   display: inline-block;
   width: 24px;
   height: 16px;
+  margin-left: auto;
 
   &::before {
     position: absolute;
@@ -53,6 +80,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  margin-left: auto;
 
   @media(max-width: 1023px) {
     display: none;
