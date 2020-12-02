@@ -50,12 +50,6 @@
   display: flex;
   width: auto;
 
-  font-style: normal;
-  font-size: 14px;
-  line-height: 16.1px;
-  font-family: $helvetica;
-  color: #F5F5F5;
-
   margin: 0;
   padding: 0;
   list-style: none;
@@ -69,5 +63,15 @@
   &:nth-child(1n):not(:last-child) {
     margin-right: 23px;
   }
+}
+
+.menu__link {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16.1px;
+  font-family: $helvetica;
+  font-weight: 400;
+  color: #F5F5F5;
+  text-decoration: none;
 }
 
