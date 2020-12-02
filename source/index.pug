@@ -28,7 +28,7 @@ html(lang="ru")
       div(class="header__image-block")
         //- block for image
 
-    section(class="biography")
+    section(class="biography" id="biography")
       div(class="biography__wrapper")
         h2(class="biography__title section-title") биография
         ul(class="biography__list")
@@ -54,7 +54,7 @@ html(lang="ru")
           li(class="section-footer__item")
             a(href="https://www.facebook.com/" class="section-footer__link-fb" target="_blank")
 
-    section(class="slider")
+    section(class="slider" id="slider")
       h2(class="visually-hidden") Слайдер с картинами Бориса Кустодиева
       div(class="slider__wrapper")
         div(class="slider__image-title")
@@ -93,7 +93,7 @@ html(lang="ru")
           button(class="slider__button-right")
         a(class="slider__link" href="") все картины
 
-    section(class="creation")
+    section(class="creation" id="creation")
       div(class="creation__wrapper")
         h2(class="creation__title section-title") творчество
         header(class="creation__header") Трудно найти другого живописца, настолько горячо&#160;влюбленного в&#160;провинциальную Россию: самобытную, яркую, удивляющую.
@@ -116,7 +116,7 @@ html(lang="ru")
           li(class="section-footer__item")
             a(href="https://www.facebook.com/" class="section-footer__link-fb" target="_blank")
     
-    section(class="map")
+    section(class="map" id="map")
       h2(class="map__title section-title section-title--map") музеи
       div(class="map__container")
         span(class="map__pin")
@@ -136,4 +136,23 @@ html(lang="ru")
           span(class="map__adress-text") 105064, Москва,
           span(class="map__adress-text") Гороховский переулок, 7
           a(class="map__phone" href="tel:84956321681") +7 (495) 632–16–81
+    
+    footer(class="footer")
+      ul(class="footer__list")
+        li(class="footer__item")
+          a(class="footer__link" href="#biography") биография
+        li(class="footer__item")
+          a(class="footer__link" href="#creation") творчество
+        li(class="footer__item")
+          a(class="footer__link" href="#slider") картины
+        li(class="footer__item")
+          a(class="footer__link" href="#map") музеи
+      ul(class="footer__social-link-list")
+        li(class="footer__social-link-item")
+          a(class="footer__social-link footer__social-link--vk"  href="https://vk.com" aria-label="Вконтакте" target="_blank")
+        li(class="footer__social-link-item")
+          a(class="footer__social-link footer__social-link--tw"  href="https://www.twitter.com" aria-label="Twitter" target="_blank")
+        li(class="footer__social-link-item")
+          a(class="footer__social-link footer__social-link--fb" href="https://www.facebook.com" aria-label="Facebook" target="_blank")
+    
     script(src="./js/script.min.js")
