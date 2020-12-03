@@ -104,6 +104,11 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: #FFFFFF;
+  background-size: cover;
+
+  @media(min-width: 630px) {
+    height: 200px;
+  }
 
   @media(min-width: $desktop-width) {
     height: auto;
@@ -111,9 +116,6 @@
     order: -1;
   
     background-image: url("../img/paint-header-desktop.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
   }
 }
 

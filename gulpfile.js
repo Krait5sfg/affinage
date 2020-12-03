@@ -72,7 +72,8 @@ gulp.task("delete", function () {
 gulp.task("copy", function () {
   return gulp.src([
     "source/fonts/**/*.{woff,woff2,ttf}",
-    "source/img/**"
+    "source/img/**",
+    "source/mock/**"
   ], {
     base: "source"
   })

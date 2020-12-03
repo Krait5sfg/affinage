@@ -270,7 +270,6 @@ jsAjax.addEventListener(`click`, (evt) => {
   } else {
     isActive = false;
     jsAjax.textContent = `читать больше`;
-    console.log(biographyList.children.length);
 
     for (let x = biographyList.children.length - 1; x > 0; x--) {
       if (biographyList.children[x].classList.contains(`biography__item--ajax`)) {
