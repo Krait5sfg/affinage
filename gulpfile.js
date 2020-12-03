@@ -13,6 +13,7 @@ var autoprefixer = require("autoprefixer");
 var del = require("del");
 var pug = require("gulp-pug");
 var uglify = require('gulp-uglify-es').default;
+var imagemin = require("gulp-imagemin");
 
 gulp.task("min-js", function () {
   return gulp.src("source/js/*.js")
@@ -86,5 +87,12 @@ gulp.task("pug", function buildHTML() {
     .pipe(gulp.dest("source"))
 })
 
-gulp.task("build", gulp.series("delete", "copy", "css", "min-js", "html"));
+gulp.task("images", function () {
+  return gulp.src("source/img/**/*.{png,jpg,svg}")
+    .pipe(imagemin())
+    .pipe(gulp.dest("build/img"));
+});
+
+
+gulp.task("build", gulp.series("delete", "copy", "css", "min-js", "images", "html"));
 gulp.task("start", gulp.series("build", "server"));
